@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Recetario</h1>
+    <a href="{{ url_for('agregar') }}" class="button">Agregar Receta</a>
+    <ul>
+        {% for receta in recetas %}
+        <li>
+            <h2>{{ receta.nombre }}</h2>
+            <p><strong>Ingredientes:</strong> {{ receta.ingredientes }}</p>
+            <p><strong>Pasos:</strong> {{ receta.pasos }}</p>
+            <a href="{{ url_for('actualizar', id=receta._id) }}" class="button">Actualizar</a>
+            <form action="{{ url_for('eliminar', id=receta._id) }}" method="POST" class="inline-form">
+                <button type="submit" class="button delete">Eliminar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
